@@ -6,11 +6,14 @@ app.use(express.json());
 
 connectDB();
 
-const StudentRoutes = require('./routes/StudentRoutes');
-const CourseRoutes = require('./routes/CourseRoutes');
+const StudentRoutes = require('./Routes/StudentRoutes');
+const CourseRoutes = require('./Routes/CourseRoutes');
+const studentCourseRoutes = require('./Routes/StudentCourseRoutes');
+
 
 app.use('/student', StudentRoutes);
 app.use('/course', CourseRoutes);
+app.use('/studentCourse', studentCourseRoutes);
 
 
 app.listen(3000, () => {
