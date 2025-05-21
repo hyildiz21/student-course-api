@@ -2,9 +2,10 @@ const { Student } = require('../Configurations/Model');
 
 //get
 async function getAllStudents() {
-  console.log("Student: ", Student);  // Burada artık mongoose modeli görmelisin
-  return await Student.find({});
+  console.log("Student: ", Student);  // mongoose modeli
+  return await Student.find({}).sort({ _id: -1 }); // _id'ye göre tersten sırala
 }
+
 
 //getBy
 async function getStudentById(id) {
