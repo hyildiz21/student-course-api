@@ -1,8 +1,9 @@
 // server.js örneği
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
-const typeDefs = require('./graphql/schema');
-const resolvers = require('./graphql/resolvers');
+
+const { typeDefs, resolvers } = require('./graphql/schemaAndResolvers');
+
 const connectDB = require('./Configurations/Configuration');
 
 async function startServer() {

@@ -11,6 +11,7 @@
   "description": "",
   "dependencies": {
     "@faker-js/faker": "^9.8.0",
+    "@graphql-tools/merge": "^9.0.24",
     "apollo-server-express": "^3.13.0",
     "express": "^5.1.0",
     "graphql": "^16.11.0",

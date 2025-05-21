@@ -1,4 +1,4 @@
-const { Student } = require('../Configurations/Model');
+const { Student } = require('../../Configurations/Model');
 
 //Query altında sadece okuma işlemleri,
 //Mutation altında ise ekleme, güncelleme, silme işlemleri bulunuyor.
