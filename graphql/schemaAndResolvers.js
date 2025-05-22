@@ -6,7 +6,19 @@ const courseTypeDefs = require('../graphql/schemas/courseSchema');
 const studentResolvers = require('../graphql/resolvers/studentResolver');
 const courseResolvers = require('../graphql/resolvers/courseResolver');
 
-const typeDefs = mergeTypeDefs([studentTypeDefs, courseTypeDefs]);
-const resolvers = mergeResolvers([studentResolvers, courseResolvers]);
+const studentCourseTypeDefs = require('../graphql/schemas/studentCourseSchema');
+const studentCourseResolvers = require('../graphql/resolvers/studentCourseResolver');
+
+const typeDefs = mergeTypeDefs([
+  studentTypeDefs,
+  courseTypeDefs,
+  studentCourseTypeDefs
+]);
+
+const resolvers = mergeResolvers([
+  studentResolvers,
+  courseResolvers,
+  studentCourseResolvers
+]);
 
 module.exports = { typeDefs, resolvers };

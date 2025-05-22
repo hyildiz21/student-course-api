@@ -25,9 +25,8 @@ async function seed() {
 
     // 1. Öğrenci Oluşturma
     const studentList = [];
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 100; i++) {
       studentList.push(new Student({
-        StudentId: uuidv4(),
         Name: faker.person.firstName(),
         Surname: faker.person.lastName(),
         Phone: faker.phone.number(),
@@ -39,20 +38,51 @@ async function seed() {
     console.log('10 öğrenci eklendi');
 
     // 2. Kurs Oluşturma
-    const courseNames = ['Matematik', 'Fizik', 'Kimya', 'Biyoloji', 'Programlama'];
-    const courseList = courseNames.map((name, index) => {
-      const startHour = 9 + index;
+    // 20 adet ders verisi ekle (Matematik ve Bilgisayar Bilimleri)
+    const mathCourses = [
+      'Lineer Cebir',
+      'Analitik Geometri',
+      'Diferansiyel Denklemler',
+      'İstatistik',
+      'Kombinatorik',
+      'Soyut Cebir',
+      'Gerçek Analiz',
+      'Sayısal Analiz',
+      'Matematiksel Mantık',
+      'Topoloji'
+    ];
+
+    const csCourses = [
+      'Veri Yapıları',
+      'Algoritmalar',
+      'Veritabanı Sistemleri',
+      'İşletim Sistemleri',
+      'Bilgisayar Mimarisi',
+      'Yapay Zeka',
+      'Makine Öğrenmesi',
+      'Web Programlama',
+      'Mobil Programlama',
+      'Siber Güvenlik'
+    ];
+
+    // Her derse uygun saat ve kod bilgisi ekleniyor
+    const allCourses = [...mathCourses, ...csCourses].map((name, index) => {
+      const startHour = 8 + (index % 10); // 08:00 - 17:00 arasında
+      const isMath = index < 10;
+
       return new Course({
-        CourseId: uuidv4(),
         Name: name,
-        DayOfWeek: (index % 5) + 1, // Pazartesi = 1, Cuma = 5
-        CourseCode: `CSE${100 + index}`,
-        StartTime: new Date(2025, 0, 1, startHour, 0), // 09:00, 10:00, ...
+        DayOfWeek: (index % 5) + 1, // Pazartesi - Cuma (1-5)
+        CourseCode: isMath ? `MATH${100 + index}` : `CSE${100 + index - 10}`,
+        StartTime: new Date(2025, 0, 1, startHour, 0),
         EndTime: new Date(2025, 0, 1, startHour + 1, 0),
       });
     });
-    const courses = await Course.insertMany(courseList);
-    console.log('5 kurs eklendi');
+
+    // MongoDB'ye ekle
+    const courses = await Course.insertMany(allCourses);
+    console.log('20 ders başarıyla eklendi.');
+
 
     // 3. Öğrenci - Kurs eşlemesi
     const studentCourseList = [];

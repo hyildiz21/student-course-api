@@ -3,7 +3,6 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
   type Student {
     id: ID!
-    StudentId: String
     Name: String
     Surname: String
     Phone: String
@@ -12,7 +11,6 @@ const typeDefs = gql`
   }
 
   input StudentInput {
-    StudentId: String
     Name: String
     Surname: String
     Phone: String

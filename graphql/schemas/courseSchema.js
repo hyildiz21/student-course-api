@@ -3,7 +3,6 @@ const { gql } = require('apollo-server-express');
 const courseTypeDefs = gql`
   type Course {
     id: ID!
-    CourseId: String
     Name: String
     DayOfWeek: Int
     CourseCode: String
@@ -12,7 +11,6 @@ const courseTypeDefs = gql`
   }
 
   input CourseInput {
-    CourseId: String
     Name: String
     DayOfWeek: Int
     CourseCode: String
