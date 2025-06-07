@@ -1,0 +1,10 @@
+services:
+  api:
+    build: .
+    container_name: api
+    ports:
+      - "3000:3000"
+    working_dir: /app/student-course-api
+    environment:
+      - MONGO_URL=mongodb+srv://voidsoftware:voidsoftware@studentclassprogram.0z7spp3.mongodb.net/test
+    command: node server.js
