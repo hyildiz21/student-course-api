@@ -33,9 +33,15 @@ const resolvers = {
 
   Mutation: {
     addStudentCourse: async (_, { data }) => {
-      const newRecord = new StudentCourse(data);
-      const saved = await newRecord.save();
-      return await saved.populate('studentId').populate('courseId');
+      // Kayıt oluşturuluyor
+      const saved = await StudentCourse.create(data);
+
+      // Kayıt tekrar sorgulanıp populate ediliyor
+      const populated = await StudentCourse.findById(saved._id)
+        .populate('studentId')
+        .populate('courseId');
+
+      return populated;
     },
 
     updateStudentCourse: async (_, { id, data }) => {

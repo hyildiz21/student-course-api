@@ -17,11 +17,8 @@ app.use('/student', StudentRoutes);
 app.use('/course', CourseRoutes);
 app.use('/studentCourse', studentCourseRoutes);
 
-const PORT = 3000;
-
-app.listen(3000, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 // ---- 
 
