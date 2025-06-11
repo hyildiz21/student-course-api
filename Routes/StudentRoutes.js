@@ -3,7 +3,7 @@ const router = express.Router();
 const studentQueries = require('../Queries/StudentQuery');
 
 //getAll
-router.get('/getAll', async (req, res) => {
+router.get('/getAll', authenticateToken, async (req, res) => {
   console.log('Route başladı');
   try {
     const students = await studentQueries.getAllStudents();
@@ -14,6 +14,7 @@ router.get('/getAll', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 
 //getById
 router.get('/getById/:id', async (req, res) => {
