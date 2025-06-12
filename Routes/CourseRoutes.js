@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
  //db işlemleri Querylerden
 const courseQueries = require('../Queries/CourseQuery');
+const authenticateToken = require('../Middlewares/authenticateToken');
 
 //Route işlemleri
 
 // getAll
-router.get('/getAll', async (req, res) => {
+router.get('/getAll', authenticateToken,async (req, res) => {
   try {
    
     const courses = await courseQueries.getAllCourses();
@@ -17,7 +18,7 @@ router.get('/getAll', async (req, res) => {
 });
 
 // POST route — courseQueries içindeki createCourse fonksiyonunu kullanıyoruz
-router.post('/add', async (req, res) => {
+router.post('/add', authenticateToken,async (req, res) => {
   try {
     const courseData = req.body;
     const savedCourse = await courseQueries.createCourse(courseData);
@@ -28,7 +29,7 @@ router.post('/add', async (req, res) => {
 });
 
 // getbyId
-router.get('/getById/:id', async (req, res) => {
+router.get('/getById/:id', authenticateToken,async (req, res) => {
   try {
     const courseId = req.params.id;
     const course = await courseQueries.getCourseById(courseId);
@@ -44,7 +45,7 @@ router.get('/getById/:id', async (req, res) => {
 });
 
 // update
-router.put('/update/:id', async (req, res) => {
+router.put('/update/:id', authenticateToken,async (req, res) => {
   try {
     const courseId = req.params.id;
     const updatedData = req.body;
@@ -62,7 +63,7 @@ router.put('/update/:id', async (req, res) => {
 });
 
 // delete
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/delete/:id', authenticateToken,async (req, res) => {
   try {
     const courseId = req.params.id;
 
