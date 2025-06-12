@@ -27,6 +27,8 @@ const typeDefs = gql`
     addStudent(studentData: StudentInput!): Student
     updateStudent(id: ID!, updateData: StudentInput!): Student
     deleteStudent(id: ID!): Student
+
+    login(username: String!, password: String!): String  # 🔐 token döndürür
   }
 `;
 
