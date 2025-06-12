@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const studentQueries = require('../Queries/StudentQuery');
+const authenticateToken = require('../Middlewares/authenticateToken');
+
 
 //getAll
 router.get('/getAll', authenticateToken, async (req, res) => {
@@ -17,7 +19,7 @@ router.get('/getAll', authenticateToken, async (req, res) => {
 
 
 //getById
-router.get('/getById/:id', async (req, res) => {
+router.get('/getById/:id',authenticateToken,async (req, res) => {
   console.log('Route başladı');
   const studentId = req.params.id; // URL'den id'yi alıyoruz
 
@@ -35,7 +37,7 @@ router.get('/getById/:id', async (req, res) => {
 });
 
 //add
-router.post('/add', async (req, res) => {
+router.post('/add', authenticateToken,async (req, res) => {
   console.log('Route başladı: add');
   const studentData = req.body;
 
@@ -50,7 +52,7 @@ router.post('/add', async (req, res) => {
 });
 
 //update
-router.put('/update/:id', async (req, res) => {
+router.put('/update/:id', authenticateToken,async (req, res) => {
   console.log('Route başladı: update');
   const studentId = req.params.id;
   const updateData = req.body;
@@ -69,7 +71,7 @@ router.put('/update/:id', async (req, res) => {
 });
 
 //delete
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/delete/:id',authenticateToken, async (req, res) => {
   console.log('Route başladı: delete');
   const studentId = req.params.id;
 

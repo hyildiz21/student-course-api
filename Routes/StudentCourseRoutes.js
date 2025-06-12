@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const studentCourseQueries = require('../Queries/StudentCourseQuery');
+const authenticateToken = require('../Middlewares/authenticateToken');
+
 
 // Tüm kayıtları getir (isteğe göre: öğrenciye ait kurslar)
-router.get('/getByStudent/:id', async (req, res) => {
+router.get('/getByStudent/:id', authenticateToken,async (req, res) => {
   try {
     const studentId = req.params.id;
     const records = await studentCourseQueries.getCoursesByStudentId(studentId);
@@ -19,7 +21,7 @@ router.get('/getByStudent/:id', async (req, res) => {
 });
 
 // Belirli bir ilişki kaydını getir (ID'ye göre)
-router.get('/getById/:id', async (req, res) => {
+router.get('/getById/:id', authenticateToken,async (req, res) => {
   try {
     const id = req.params.id;
     const record = await studentCourseQueries.getStudentCourseById(id);
@@ -35,7 +37,7 @@ router.get('/getById/:id', async (req, res) => {
 });
 
 // Yeni ilişki oluştur
-router.post('/add', async (req, res) => {
+router.post('/add',authenticateToken ,async (req, res) => {
   try {
     const data = req.body;
     const newRecord = await studentCourseQueries.createStudentCourse(data);
@@ -46,7 +48,7 @@ router.post('/add', async (req, res) => {
 });
 
 // Güncelle
-router.put('/update/:id', async (req, res) => {
+router.put('/update/:id', authenticateToken,async (req, res) => {
   try {
     const id = req.params.id;
     const updatedData = req.body;
@@ -64,7 +66,7 @@ router.put('/update/:id', async (req, res) => {
 });
 
 // Sil
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/delete/:id', authenticateToken,async (req, res) => {
   try {
     const id = req.params.id;
 

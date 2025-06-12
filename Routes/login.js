@@ -22,7 +22,7 @@ router.post('/login', (req, res) => {
   const token = jwt.sign(
     { username: user.username, id: user.id },
     JWT_SECRET,
-    { expiresIn: '1h' }
+    { expiresIn: '1h' } // token süresi
   );
 
   res.json({ token });
